@@ -1,5 +1,5 @@
-import { MainAuthPage } from '@/pages/authPage/mainAuthPage';
+import AuthPage from './auth/page';
 
 export default function Home() {
-  return <MainAuthPage></MainAuthPage>;
+  return <AuthPage></AuthPage>;
 }

@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #272727;
+  --foreground: #272727;
+}
+:active, :hover, :focus {
+  outline: 0;
+  outline-offset: 0;
 }
 
 @theme inline {
@@ -14,8 +18,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #272727;
+    --foreground: #272727;
   }
 }
 

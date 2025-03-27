@@ -1,4 +1,5 @@
 import { MyBordersRadius, MyColors, MyPadding } from '@/shared/styles';
+import { MyTypography } from '@/shared/styles/styles/typography';
 
 export const CustomButton = ({
   onClick,
@@ -17,11 +18,13 @@ export const CustomButton = ({
     <button
       onClick={handleClick}
       style={{
-        borderRadius: MyBordersRadius.outer,
-        padding: MyPadding.min,
+        borderRadius: MyBordersRadius.inner,
+        padding: MyPadding.medium,
         backgroundColor: color,
         display: 'flex',
         width: '100%',
+        justifyContent: 'center',
+        ...MyTypography.medium16,
       }}
     >
       {label}

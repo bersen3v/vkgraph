@@ -10,9 +10,18 @@
     "prettier:format": "prettier --write ."
   },
   "dependencies": {
+    "@next/font": "^14.2.15",
+    "@visualsource/selective-unrealbloompass": "^1.0.1",
+    "3d-force-graph": "^1.77.0",
+    "aframe": "^1.7.0",
+    "force-graph": "^1.49.5",
     "next": "15.2.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-feather": "^2.0.10",
+    "react-force-graph": "^1.47.6",
+    "react-force-graph-3d": "^1.26.1",
+    "three": "^0.174.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -20,6 +29,7 @@
     "@types/node": "20.17.25",
     "@types/react": "19.0.12",
     "@types/react-dom": "^19",
+    "@types/three": "^0.174.0",
     "eslint": "^9",
     "eslint-config-next": "15.2.3",
     "eslint-config-prettier": "^10.1.1",

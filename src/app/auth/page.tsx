@@ -5,7 +5,7 @@ import { CustomButton } from '@/shared/widgets/customButton';
 import { CustomInput, useCustomInput } from '@/shared/widgets/customInput';
 import { useRouter } from 'next/navigation';
 
-export const MainAuthPage = () => {
+const AuthPage = () => {
   const router = useRouter();
 
   const loginController = useCustomInput();
@@ -40,27 +40,42 @@ export const MainAuthPage = () => {
           flexDirection: 'column',
         }}
       >
-        <div>
+        <div
+          style={{
+            gap: MySpacing.min,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
           <CustomInput
-            placeholder={'Введи логин'}
+            placeholder={'введи логин'}
             customInputController={loginController}
           ></CustomInput>
           <CustomInput
-            placeholder={'Введи пароль'}
+            secret={true}
+            placeholder={'введи пароль'}
             customInputController={passwordController}
           ></CustomInput>
         </div>
-        <div>
+        <div
+          style={{
+            gap: MySpacing.min,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
           <CustomButton
             onClick={handleAuthPress}
-            label={'Войти'}
+            label={'войти'}
           ></CustomButton>
           <CustomButton
             onClick={handleRegisterPress}
-            label={'Зарегистрироваться'}
+            label={'зарегистрироваться'}
           ></CustomButton>
         </div>
       </div>
     </div>
   );
 };
+
+export default AuthPage;

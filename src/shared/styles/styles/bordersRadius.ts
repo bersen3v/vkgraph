@@ -1,4 +1,4 @@
 export const MyBordersRadius = {
-  outer: '5px',
-  inner: '10px'
+  outer: '25px',
+  inner: '15px'
 }
