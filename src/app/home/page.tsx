@@ -1,82 +1,89 @@
 'use client';
-import { MySpacing } from '@/shared/styles';
-import { useCustomInput } from '@/shared/widgets/customInput';
-import { UserInfoModal } from './components';
 
-import { useMemo, useState } from 'react';
-import { GraphData, GraphLink, GraphNode } from '@/entities/graph/model/model';
-import Graph from '@/entities/graph/ui/graph';
+import {
+  MyBordersRadius,
+  MyColors,
+  MyPadding,
+  MySpacing,
+} from '@/shared/styles';
+import { MyTypography } from '@/shared/styles/styles/typography';
+import { CustomButton } from '@/shared/widgets/customButton';
+import { useRouter } from 'next/navigation';
 
 const HomePage = () => {
-  const inputVkIdController = useCustomInput();
+  const router = useRouter();
 
-  const initGraphData = useMemo(() => {
-    return {
-      nodes: [],
-      links: [],
-    };
-  }, []);
-
-  const [graphData, setGraphData] = useState<GraphData>(initGraphData);
-
-  const handleCreateGraphClick = () => {
-    setGraphData(initGraphData);
-
-    const eventSource = new EventSource(
-      `http://127.0.0.1:5000/stream?id=${inputVkIdController.value}`,
-    );
-
-    eventSource.onmessage = (event) => {
-      const data = JSON.parse(event.data) as GraphData;
-      if (data.nodes.length % 3 === 0)
-        setGraphData((graphData) => {
-          const newNodes: GraphNode[] = [];
-          data.nodes.forEach((node) => {
-            const isInArray = graphData.nodes.filter(
-              (node1) => node1.id === node.id,
-            );
-            if (isInArray.length === 0) {
-              newNodes.push(node);
-            }
-          });
-
-          const newLinks: GraphLink[] = [];
-          data.links.forEach((link) => {
-            const isInArray = graphData.links.filter(
-              (link1) =>
-                link1.target === link.target && link.source == link1.source,
-            );
-            if (isInArray.length === 0) {
-              newLinks.push(link);
-            }
-          });
-
-          return {
-            nodes: [...graphData.nodes, ...newNodes],
-            links: [...graphData.links, ...newLinks],
-          };
-        });
-    };
-  };
-
-  return (
-    <div style={{ display: 'flex' }}>
-      <div style={{ position: 'relative' }}>
-        <Graph graphData={graphData}></Graph>
-      </div>
+  const PagePreview = ({
+    title,
+    description,
+    href,
+  }: {
+    title: string;
+    description: string;
+    href: string;
+  }) => {
+    return (
       <div
         style={{
-          width: '100vw',
-          position: 'absolute',
-          top: MySpacing.medium,
-          left: MySpacing.medium,
+          backgroundColor: MyColors.black70,
+          padding: MyPadding.big,
+          borderRadius: MyBordersRadius.outer,
+          width: '50vh',
         }}
       >
-        <UserInfoModal
-          inputVkIdController={inputVkIdController}
-          handleCreateGraphClick={handleCreateGraphClick}
-        ></UserInfoModal>
+        <p
+          style={{
+            ...MyTypography.medium22,
+            color: MyColors.white,
+            paddingLeft: MyPadding.min,
+          }}
+        >
+          {title}
+        </p>
+        <p
+          style={{
+            ...MyTypography.roman16,
+            color: MyColors.white,
+            lineHeight: 1.2,
+            padding: MyPadding.min,
+            paddingBottom: MyPadding.medium,
+          }}
+        >
+          {description}
+        </p>
+        <CustomButton
+          onClick={() => {
+            router.push(href);
+          }}
+          label={'открыть'}
+        ></CustomButton>
       </div>
+    );
+  };
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        padding: MyPadding.big,
+        gap: MyPadding.medium,
+      }}
+    >
+      <PagePreview
+        title={'Создание графа'}
+        description={
+          'Здесь вы можете сгенерировать граф любого пользователя вконтакте'
+        }
+        href={'/graph'}
+      ></PagePreview>
+
+      <PagePreview
+        title={'История поиска'}
+        description={
+          'Здесь вы можете посмотреть графы, которые были ранее вами сгенерированы'
+        }
+        href={'/history'}
+      ></PagePreview>
     </div>
   );
 };

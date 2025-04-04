@@ -5,5 +5,5 @@ export const MyColors = {
   black30: '#9E9E9E',
   black50: '#505050',
   green: '#E2FF31',
-
+  orange: '#EC5601'
 }

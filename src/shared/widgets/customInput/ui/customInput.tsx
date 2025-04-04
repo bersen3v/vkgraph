@@ -8,10 +8,12 @@ export const CustomInput = ({
   customInputController,
   placeholder,
   secret = false,
+  onChange = () => {},
 }: {
   placeholder: string;
   customInputController: ReturnType<typeof useCustomInput>;
   secret?: boolean;
+  onChange?: (value: string) => void;
 }) => {
   const [visible, setVisible] = useState(true);
   const handleClickVisible = () => {
@@ -38,7 +40,10 @@ export const CustomInput = ({
         type={secret ? (visible ? 'text' : 'password') : 'text'}
         placeholder={placeholder}
         value={customInputController.value}
-        onChange={(e) => customInputController.setValue(e.target.value)}
+        onChange={(e) => {
+          onChange(e.target.value);
+          customInputController.setValue(e.target.value);
+        }}
       />
       {secret && (
         <button onClick={handleClickVisible}>
