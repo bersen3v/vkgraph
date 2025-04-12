@@ -18,12 +18,13 @@ const GraphPage = () => {
   }, []);
 
   const [graphData, setGraphData] = useState<GraphData>(initGraphData);
+  const authKey = localStorage.getItem('authKey')
 
   const handleCreateGraphClick = () => {
     setGraphData(initGraphData);
 
     const eventSource = new EventSource(
-      `http://127.0.0.1:5000/graphstream?id=${inputVkIdController.value}`,
+      `http://127.0.0.1:5000/graphstream?id=${inputVkIdController.value}&customer_id=${authKey}`,
     );
 
     eventSource.onmessage = (event) => {
