@@ -5,9 +5,12 @@ import Graph from '@/entities/graph/ui/graph';
 import useRequest from '@/shared/api/helpers/requestReducer/hooks/useRequest';
 import { MyBordersRadius, MyColors, MySpacing } from '@/shared/styles';
 import { CustomButton } from '@/shared/widgets/customButton';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 const HistoryPage = () => {
+  const router = useRouter();
+
   const [request, reload] = useRequest(
     () => customerApiManager.getHistory(),
     [],
@@ -22,7 +25,7 @@ const HistoryPage = () => {
     <div>
       {request.isLoaded ? (
         <div>
-          {request.data.map((val, index) => (
+          {request.data?.map((val, index) => (
             <div
               key={index}
               style={{
@@ -40,7 +43,12 @@ const HistoryPage = () => {
               >
                 поиск {index + 1}
               </p>
-              <CustomButton onClick={() => {}} label={'Открыть'}></CustomButton>
+              <CustomButton
+                onClick={() => {
+                  router.push(`/history?id=${index}`);
+                }}
+                label={'Открыть'}
+              ></CustomButton>
             </div>
           ))}
         </div>
