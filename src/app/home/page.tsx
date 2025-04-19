@@ -84,6 +84,18 @@ const HomePage = () => {
         }
         href={'/history'}
       ></PagePreview>
+
+      <PagePreview
+        title={'Добавление пользователей'}
+        description={'Здесь вы можете добавить пользователей в бд'}
+        href={'/addusers'}
+      ></PagePreview>
+
+      <PagePreview
+        title={'Просмотр БД'}
+        description={'Здесь вы можете посмотреть и изменить содержимое бд'}
+        href={'/manageDb'}
+      ></PagePreview>
     </div>
   );
 };

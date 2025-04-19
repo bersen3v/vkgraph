@@ -4,6 +4,7 @@ import { customerApiManager } from '@/entities/customer/api/customerApiManager';
 import Graph from '@/entities/graph/ui/graph';
 import useRequest from '@/shared/api/helpers/requestReducer/hooks/useRequest';
 import { MyBordersRadius, MyColors, MySpacing } from '@/shared/styles';
+import { MyTypography } from '@/shared/styles/styles/typography';
 import { CustomButton } from '@/shared/widgets/customButton';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -21,6 +22,7 @@ const HistoryPage = () => {
       console.log(request.data);
     }
   }, [request]);
+
   return (
     <div>
       {request.isLoaded ? (
@@ -38,6 +40,8 @@ const HistoryPage = () => {
             >
               <p
                 style={{
+                  ...MyTypography.medium22,
+                  color: MyColors.white,
                   display: 'flex',
                 }}
               >
@@ -45,7 +49,7 @@ const HistoryPage = () => {
               </p>
               <CustomButton
                 onClick={() => {
-                  router.push(`/history?id=${index}`);
+                  router.push(`/history/${index}`);
                 }}
                 label={'Открыть'}
               ></CustomButton>

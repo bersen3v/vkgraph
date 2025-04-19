@@ -1,8 +1,11 @@
+import GraphFromHistoryView from "./view";
+
 export default async function GraphFromHistory({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ historyId: string }>;
 }) {
-  const { id } = await params;
-  return <div>{id}</div>;
+  const historyId = Number((await params).historyId);
+
+  return <GraphFromHistoryView historyId={historyId}></GraphFromHistoryView>;
 }
